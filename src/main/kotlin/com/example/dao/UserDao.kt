@@ -2,8 +2,6 @@ package com.example.dao
 
 import org.jdbi.v3.core.Jdbi
 import com.example.ConnectionBuilder
-import org.jdbi.v3.core.statement.Query
-import java.sql.ResultSet
 
 class UserDao() {
     companion object {
