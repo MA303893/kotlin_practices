@@ -4,10 +4,17 @@ import org.jdbi.v3.core.Handle
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.statement.Query
 import org.jdbi.v3.core.statement.Update
+import org.postgresql.ds.PGSimpleDataSource
 import java.text.SimpleDateFormat
 
 fun main(args: Array<String>) {
-    val jdbi = Jdbi.create("jdbc:postgresql://localhost/kotlin_jpa", "kotlin_dbuser", "kotlin_dbpwd")
+    val dataSource = PGSimpleDataSource()
+    dataSource.setURL("jdbc:postgresql://localhost/")
+    dataSource.user = "kotlin_dbuser"
+    dataSource.password = "kotlin_dbpwd"
+    dataSource.databaseName = "kotlin_jpa"
+
+    val jdbi = Jdbi.create(dataSource)
     val handle: Handle = jdbi.open()
     val query: Query = handle.createQuery("select * from users")
     val results: List<Map<String, Any>> = query.mapToMap().list()
