@@ -6,7 +6,6 @@ import org.jdbi.v3.core.statement.Query
 import org.jdbi.v3.core.statement.Update
 import org.postgresql.ds.PGSimpleDataSource
 import java.text.SimpleDateFormat
-
 fun main(args: Array<String>) {
     val dataSource = PGSimpleDataSource()
     dataSource.setURL("jdbc:postgresql://localhost/")
@@ -28,7 +27,7 @@ fun main(args: Array<String>) {
         insert.bind(0, "Manish")
         insert.bind(1, "Singh")
         insert.bind(2, SimpleDateFormat("dd-MM-yyyy").parse("14-02-2018"))
-        insert.bind(3, "as@sd3.com")
+        insert.bind(3, "as@sd4.com")
         insert.bind(4, "df.jpx")
         val i: Int = insert.execute()
         println(i)
