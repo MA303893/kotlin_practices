@@ -6,17 +6,19 @@ import com.example.ConnectionBuilder
 class UserDao() {
     companion object {
         val jdbi: Jdbi = ConnectionBuilder.getJdbiConnection()
-        fun getAllUserEmails() {
-            val emails = jdbi.withHandle<List<Map<String, Any>>, Exception> { handle ->
-                handle.createQuery("select email from users").mapToMap().list()
+        fun getAllUserEmails(): List<String> {
+            val emails = jdbi.withHandle<List<String>, Exception> { handle ->
+                handle.createQuery("select email from users").mapToMap().map {
+                    it.get("email") as String
+                }
             }
-            emails.forEach {
-                println(it.values)
-            }
+            return emails
         }
     }
 }
 
 fun main(args: Array<String>) {
-    UserDao.getAllUserEmails()
+    UserDao.getAllUserEmails().forEach {
+        println(it)
+    }
 }
